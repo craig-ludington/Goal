@@ -25,9 +25,9 @@ We'd prefer something concise:
 ````
 if! x f() doit() complain(err)
 ````
-*if!* could be an [(http://en.wikipedia.org/wiki/Anaphoric_macro) anaphoric macro] providing a properly scoped *err* variable.
+*if!* could be an [anaphoric macro](http://en.wikipedia.org/wiki/Anaphoric_macro) providing a properly scoped *err* variable.
 
-This project is part of [(http://nelsoncash.com/)Nelson Cash]'s *work on your own stuff Friday* initiative.
+This project is part of [Nelson Cash](http://nelsoncash.com/)'s *work on your own stuff Friday* initiative.
 We're supposed to create, have fun, and be experimental.
 
 
