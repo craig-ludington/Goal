@@ -14,9 +14,9 @@ and a second error value.  Instead of writing:
 
 ````
 if x, err := f() ; err != nil {
-  doit() {
-} else {
   complain(err)
+} else {
+  doit()
 }
 	  
 ````
