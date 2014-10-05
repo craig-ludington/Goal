@@ -1,0 +1,16 @@
+package main
+
+import (
+	"fmt"
+)
+
+func f() (int, error) {
+	return 1, nil
+}
+
+func main() {
+	if! x f() fmt.Printf("Win: %d\n", x) fmt.Printf("Lose: %v\n", err)
+
+	if! y f(1, 2, 3) fmt.Printf("Success") fmt.Printf("Fail")
+
+}
