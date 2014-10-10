@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'cl)
+
 (defun goal!tokenize-if-bang (line)
   (let* ((exp-s (string-match "if!" line))
 	 (exp-e (match-end 0))
@@ -11,7 +13,7 @@
 	 (var-e (match-end 0))
 	 (var (substring line var-s var-e))
 	 
-	 (test-s (string-match "[a-zA-Z_]+([^)]*)" line var-e))
+	 (test-s (string-match "[a-zA-Z_.]+([^)]*)" line var-e))
 	 (test-e (match-end 0))
 	 (test (substring line test-s test-e))
 
@@ -28,7 +30,9 @@
   (assert (equal '(:if! "x" "f()" "good(1, 2)" "bad(err)")
 		 (goal!tokenize-if-bang "if! x f() good(1, 2) bad(err)")))
   (assert (equal '(:if! "x_y" "foo(1, 2)" "good(1, 2)" "bad(err)")
-		 (goal!tokenize-if-bang "if! x_y foo(1, 2) good(1, 2) bad(err)"))))
+		 (goal!tokenize-if-bang "if! x_y foo(1, 2) good(1, 2) bad(err)")))
+  (assert (equal '(:if! "x_y" "fmt.Printf(1, 2)" "good(1, 2)" "bad(err)")
+		 (goal!tokenize-if-bang "if! x_y fmt.Printf(1, 2) good(1, 2) bad(err)"))))
 
 (defun goal!emit-if-bang (spec)
   (destructuring-bind (expr var test b1 b2) spec
@@ -52,5 +56,14 @@
       (kill-line)
       (insert (goal!emit-if-bang (goal!tokenize-if-bang line))))))
 
-(provide 'goal!if-bang)
+(defun goal!output-file-name (src)
+  (let ((offset (string-match "[^/]+.goal$" src)))
+    (if offset
+	(let* ((file (substring src offset))
+	       (base (substring file 0 (or (string-match "\.goal$" file) 0)))
+	       (dst (concatenate 'string base ".go")))
+	  dst)
+      (error (format "Expected a Goal! source file, got: '%s'" src)))))
+
+(provide 'goal-if-bang)
 ;;; goal-if-bang.el ends here

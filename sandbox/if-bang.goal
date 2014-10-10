@@ -8,9 +8,13 @@ func f() (int, error) {
 	return 1, nil
 }
 
+func g(x,y,z int) (int, error) {
+	return 1, nil
+}
+
 func main() {
 	if! x f() fmt.Printf("Win: %d\n", x) fmt.Printf("Lose: %v\n", err)
 
-	if! y f(1, 2, 3) fmt.Printf("Success") fmt.Printf("Fail")
+	if! y g(1, 2, 3) fmt.Printf("Success") fmt.Printf("Fail")
 
 }
