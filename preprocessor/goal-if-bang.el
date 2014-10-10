@@ -17,11 +17,11 @@
 	 (test-e (match-end 0))
 	 (test (substring line test-s test-e))
 
-	 (b1-s (string-match "[a-zA-Z_]+([^)]+)" line test-e))
+	 (b1-s (string-match "[a-zA-Z_.]+([^)]+)" line test-e))
 	 (b1-e (match-end 0))
 	 (b1 (substring line b1-s b1-e))
 
-	 (b2-s (string-match "[a-zA-Z_]+([^)]+)" line b1-e))
+	 (b2-s (string-match "[a-zA-Z_.]+([^)]+)" line b1-e))
 	 (b2-e (match-end 0))
 	 (b2 (substring line b2-s b2-e)))
     `(:if! ,var ,test ,b1 ,b2)))
@@ -31,8 +31,8 @@
 		 (goal!tokenize-if-bang "if! x f() good(1, 2) bad(err)")))
   (assert (equal '(:if! "x_y" "foo(1, 2)" "good(1, 2)" "bad(err)")
 		 (goal!tokenize-if-bang "if! x_y foo(1, 2) good(1, 2) bad(err)")))
-  (assert (equal '(:if! "x_y" "fmt.Printf(1, 2)" "good(1, 2)" "bad(err)")
-		 (goal!tokenize-if-bang "if! x_y fmt.Printf(1, 2) good(1, 2) bad(err)"))))
+  (assert (equal '(:if! "x_y" "foo(1, 2)" "fmt.Printf(\"%d %d\", 1, 2)" "bad(err)")
+		 (goal!tokenize-if-bang "if! x_y foo(1, 2) fmt.Printf(\"%d %d\", 1, 2) bad(err)"))))
 
 (defun goal!emit-if-bang (spec)
   (destructuring-bind (expr var test b1 b2) spec
