@@ -30,7 +30,11 @@ if! x f() doit() complain(err)
 This project is part of [Nelson Cash](http://nelsoncash.com/)'s *work on your own stuff Friday* initiative.
 We're supposed to create, have fun, and be experimental.
 
-
+Prior Art
+=========
+[gofmt](https://golang.org/cmd/gofmt/)
+[goreturns](https://github.com/sqs/goreturns)
+[goimports](https://github.com/bradfitz/goimports)
 
 
 
